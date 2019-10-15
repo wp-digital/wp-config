@@ -1,0 +1,16 @@
+{
+  "name": "innocode-digital/wp-config",
+  "version": "1.0.0",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.1",
+    "vlucas/phpdotenv": "^3.5"
+  },
+  "description": "Library for WordPress configuration.",
+  "autoload": {
+    "psr-4": {
+      "Innocode\\WPConfig\\": "src/"
+    }
+  }
+}
