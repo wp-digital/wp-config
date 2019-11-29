@@ -89,6 +89,18 @@ final class Config
         if ( Helpers::is_s3_uploads_enabled() ) {
             $this->require( 's3-uploads' );
         }
+
+        if ( Helpers::is_recaptcha_enabled() ) {
+            $this->require( 'recaptcha' );
+        }
+
+        if ( Helpers::is_github_oauth_enabled() ) {
+            $this->require( 'oauth' );
+        }
+
+        if ( Helpers::is_cdn_enabled() ) {
+            $this->require( 'cdn' );
+        }
     }
 
     public function get_config_by_name( string $name )

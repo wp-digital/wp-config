@@ -41,4 +41,28 @@ final class Helpers
     {
         return Env::get( 'MULTISITE' );
     }
+
+    /**
+     * @return bool
+     */
+    public static function is_recaptcha_enabled() : bool
+    {
+        return (bool) Env::get( 'RECAPTCHA_KEY' );
+    }
+
+    /**
+     * @return bool
+     */
+    public static function is_github_oauth_enabled() : bool
+    {
+        return (bool) Env::get( 'GITHUB_OAUTH_CLIENT_ID' );
+    }
+
+    /**
+     * @return bool
+     */
+    public static function is_cdn_enabled() : bool
+    {
+        return (bool) Env::get( 'CDN' );
+    }
 }
