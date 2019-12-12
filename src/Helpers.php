@@ -63,6 +63,6 @@ final class Helpers
      */
     public static function is_cdn_enabled() : bool
     {
-        return (bool) Env::get( 'CDN' );
+        return (bool) Env::get( 'CDN_DOMAIN' );
     }
 }
