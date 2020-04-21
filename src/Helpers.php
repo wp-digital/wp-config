@@ -65,4 +65,20 @@ final class Helpers
     {
         return (bool) Env::get( 'CDN_DOMAIN' );
     }
+
+    /**
+     * @return bool
+     */
+    public static function is_debug_enabled() : bool
+    {
+        return Env::get( 'DEBUG' );
+    }
+
+    /**
+     * @return bool
+     */
+    public static function is_mailgun_enabled() : bool
+    {
+        return (bool) Env::get( 'MAILGUN_APIKEY' );
+    }
 }

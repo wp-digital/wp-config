@@ -13,15 +13,15 @@ final class Config
     /**
      * @var string
      */
-    private $_path;
+    private $path;
     /**
      * @var Dotenv
      */
-    private $_dotenv;
+    private $dotenv;
     /**
      * @var array
      */
-    private $_required_constants = [
+    private $required_constants = [
         'DB_NAME',
         'DB_USER',
         'DB_PASSWORD',
@@ -41,8 +41,8 @@ final class Config
      */
     public function __construct( string $path )
     {
-        $this->_path = $path;
-        $this->_dotenv = Dotenv::create( $path );
+        $this->path = $path;
+        $this->dotenv = Dotenv::create( $path );
     }
 
     /**
@@ -51,7 +51,7 @@ final class Config
     public function add_required_constant( string $constant )
     {
         if ( ! $this->has_required_constant( $constant ) ) {
-            $this->_required_constants[] = $constant;
+            $this->required_constants[] = $constant;
         }
     }
 
@@ -61,14 +61,14 @@ final class Config
      */
     public function has_required_constant( string $constant ) : bool
     {
-        return false === array_search( $constant, $this->_required_constants );
+        return false === array_search( $constant, $this->required_constants );
     }
 
     public function init()
     {
-        $this->_dotenv->overload();
-        $this->_init_required_constants();
-        $this->_dotenv->required( $this->_required_constants );
+        $this->dotenv->overload();
+        $this->init_required_constants();
+        $this->dotenv->required( $this->required_constants );
     }
 
     public function load()
@@ -78,6 +78,7 @@ final class Config
             'secret-keys',
             'app',
             'debug',
+            'mail',
         ] as $config ) {
             $this->require( $config );
         }
@@ -105,7 +106,7 @@ final class Config
 
     public function get_config_by_name( string $name )
     {
-        return "$this->_path/config/$name.php";
+        return "$this->path/config/$name.php";
     }
 
     /**
@@ -118,17 +119,25 @@ final class Config
         require_once $file;
     }
 
-    private function _init_required_constants()
+    private function init_required_constants()
     {
         if ( Helpers::is_multisite_allowed() && Helpers::is_multisite() ) {
-            $this->_required_constants[] = 'DOMAIN_CURRENT_SITE';
+            $this->required_constants[] = 'DOMAIN_CURRENT_SITE';
         } else {
-            $this->_required_constants[] = 'WP_HOME';
+            $this->required_constants[] = 'WP_HOME';
+        }
+
+        if ( Helpers::is_mailgun_enabled() ) {
+            array_push(
+                $this->required_constants,
+                'MAILGUN_DOMAIN',
+                'MAILGUN_FROM_ADDRESS',
+            );
         }
 
         if ( Helpers::is_s3_uploads_enabled() ) {
             array_push(
-                $this->_required_constants,
+                $this->required_constants,
                 'S3_UPLOADS_KEY',
                 'S3_UPLOADS_SECRET',
                 'S3_UPLOADS_REGION'
