@@ -131,7 +131,7 @@ final class Config
             array_push(
                 $this->required_constants,
                 'MAILGUN_DOMAIN',
-                'MAILGUN_FROM_ADDRESS',
+                'MAILGUN_FROM_ADDRESS'
             );
         }
 
