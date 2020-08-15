@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.1",
-    "vlucas/phpdotenv": "^3.5"
+    "vlucas/phpdotenv": "^4.0"
   },
   "description": "Library for WordPress configuration.",
   "autoload": {
