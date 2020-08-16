@@ -42,7 +42,7 @@ final class Config
     public function __construct( string $path )
     {
         $this->path = $path;
-        $this->dotenv = Dotenv::create( $path );
+        $this->dotenv = Dotenv::createImmutable( $path );
     }
 
     /**
@@ -66,7 +66,7 @@ final class Config
 
     public function init()
     {
-        $this->dotenv->overload();
+        $this->dotenv->load();
         $this->init_required_constants();
         $this->dotenv->required( $this->required_constants );
     }
