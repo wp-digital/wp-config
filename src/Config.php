@@ -102,9 +102,17 @@ final class Config
         if ( Helpers::is_cdn_enabled() ) {
             $this->require( 'cdn' );
         }
+
+        if ( Helpers::is_redis_cache_enabled() ) {
+            $this->require( 'cache' );
+        }
     }
 
-    public function get_config_by_name( string $name )
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function get_config_by_name( string $name ) : string
     {
         return "$this->path/config/$name.php";
     }

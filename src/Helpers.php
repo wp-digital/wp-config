@@ -81,4 +81,12 @@ final class Helpers
     {
         return (bool) Env::get( 'MAILGUN_APIKEY' );
     }
+
+    /**
+     * @return bool
+     */
+    public static function is_redis_cache_enabled() : bool
+    {
+        return (bool) Env::get( 'WP_REDIS_HOST' );
+    }
 }
