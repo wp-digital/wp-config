@@ -87,9 +87,11 @@ final class Helpers
      */
     public static function is_redis_cache_enabled() : bool
     {
-        return (bool) Env::get( 'WP_REDIS_HOST' ) ||
-            (bool) Env::get( 'WP_REDIS_SERVERS' ) ||
-            (bool) Env::get( 'WP_REDIS_SHARDS' ) ||
-            (bool) Env::get( 'WP_REDIS_CLUSTER' );
+        return (
+            Env::get( 'WP_REDIS_HOST' ) ||
+            Env::get( 'WP_REDIS_SERVERS' ) ||
+            Env::get( 'WP_REDIS_SHARDS' ) ||
+            Env::get( 'WP_REDIS_CLUSTER' )
+        ) && ! ( defined( 'WP_REDIS_DISABLED' ) && WP_REDIS_DISABLED );
     }
 }

@@ -105,6 +105,9 @@ final class Config
 
         if ( Helpers::is_redis_cache_enabled() ) {
             $this->require( 'cache' );
+        } elseif ( ! defined( 'WP_REDIS_DISABLED' ) ) {
+            // Disable object-cache.php drop-in.
+            define( 'WP_REDIS_DISABLED', true );
         }
     }
 
