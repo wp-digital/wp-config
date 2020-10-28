@@ -92,6 +92,6 @@ final class Helpers
             Env::get( 'WP_REDIS_SERVERS' ) ||
             Env::get( 'WP_REDIS_SHARDS' ) ||
             Env::get( 'WP_REDIS_CLUSTER' )
-        ) && ! ( defined( 'WP_REDIS_DISABLED' ) && WP_REDIS_DISABLED );
+        ) && ! Env::get( 'WP_REDIS_DISABLED' );
     }
 }
