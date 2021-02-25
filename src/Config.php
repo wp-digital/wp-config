@@ -15,6 +15,10 @@ final class Config
      */
     private $path;
     /**
+     * @var string
+     */
+    private $name;
+    /**
      * @var Dotenv
      */
     private $dotenv;
@@ -37,12 +41,14 @@ final class Config
 
     /**
      * Config constructor.
-     * @param string $path
+     * @param string      $path
+     * @param string|null $name
      */
-    public function __construct( string $path )
+    public function __construct( string $path, ?string $name = '.env' )
     {
         $this->path = $path;
-        $this->dotenv = Dotenv::createImmutable( $path );
+        $this->name = $name;
+        $this->dotenv = Dotenv::createImmutable( $path, $name );
     }
 
     /**
@@ -66,7 +72,10 @@ final class Config
 
     public function init()
     {
-        $this->dotenv->load();
+        if ( $this->name !== null ) {
+            $this->dotenv->load();
+        }
+
         $this->init_required_constants();
         $this->dotenv->required( $this->required_constants );
     }
