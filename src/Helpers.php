@@ -94,4 +94,14 @@ final class Helpers
             Env::get( 'WP_REDIS_CLUSTER' )
         ) && ! Env::get( 'WP_REDIS_DISABLED' );
     }
+
+    public static function is_bugsnag_enabled() : bool
+    {
+        return (bool) Env::get( 'BUGSNAG_API_KEY' );
+    }
+
+    public static function is_aws_lambda_image_editor_enabled() : bool
+    {
+        return (bool) Env::get( 'AWS_LAMBDA_IMAGE_KEY' );
+    }
 }

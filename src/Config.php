@@ -118,6 +118,14 @@ final class Config
             // Disable object-cache.php drop-in.
             define( 'WP_REDIS_DISABLED', true );
         }
+
+        if ( Helpers::is_bugsnag_enabled() ) {
+            $this->require( 'bugsnag' );
+        }
+
+        if ( Helpers::is_aws_lambda_image_editor_enabled() ) {
+            $this->require( 'aws-lambda-image-editor' );
+        }
     }
 
     /**
@@ -161,6 +169,21 @@ final class Config
                 'S3_UPLOADS_KEY',
                 'S3_UPLOADS_SECRET',
                 'S3_UPLOADS_REGION'
+            );
+        }
+
+        if ( Helpers::is_recaptcha_enabled() ) {
+            array_push(
+                $this->required_constants,
+                'RECAPTCHA_SECRET'
+            );
+        }
+
+        if ( Helpers::is_aws_lambda_image_editor_enabled() ) {
+            array_push(
+                $this->required_constants,
+                'AWS_LAMBDA_IMAGE_SECRET',
+                'AWS_LAMBDA_IMAGE_REGION'
             );
         }
     }
