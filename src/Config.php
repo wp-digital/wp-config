@@ -185,6 +185,13 @@ final class Config
                 'AWS_LAMBDA_IMAGE_SECRET',
                 'AWS_LAMBDA_IMAGE_REGION'
             );
+
+            if ( ! Helpers::is_s3_uploads_enabled() ) {
+                array_push(
+                    $this->required_constants,
+                    'AWS_LAMBDA_IMAGE_BUCKET'
+                );
+            }
         }
     }
 }
