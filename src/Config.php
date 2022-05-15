@@ -67,7 +67,7 @@ final class Config
      */
     public function has_required_constant( string $constant ) : bool
     {
-        return false === array_search( $constant, $this->required_constants );
+        return in_array( $constant, $this->required_constants );
     }
 
     public function init()
@@ -104,8 +104,8 @@ final class Config
             $this->require( 'recaptcha' );
         }
 
-        if ( Helpers::is_github_oauth_enabled() ) {
-            $this->require( 'oauth' );
+        if ( Helpers::is_inncognito_enabled() ) {
+            $this->require( 'inncognito' );
         }
 
         if ( Helpers::is_cdn_enabled() ) {
@@ -173,10 +173,7 @@ final class Config
         }
 
         if ( Helpers::is_recaptcha_enabled() ) {
-            array_push(
-                $this->required_constants,
-                'RECAPTCHA_SECRET'
-            );
+            $this->required_constants[] = 'RECAPTCHA_SECRET';
         }
 
         if ( Helpers::is_aws_lambda_image_editor_enabled() ) {
@@ -187,11 +184,18 @@ final class Config
             );
 
             if ( ! Helpers::is_s3_uploads_enabled() ) {
-                array_push(
-                    $this->required_constants,
-                    'AWS_LAMBDA_IMAGE_BUCKET'
-                );
+                $this->required_constants[] = 'AWS_LAMBDA_IMAGE_BUCKET';
             }
+        }
+
+        if ( Helpers::is_inncognito_enabled() ) {
+            array_push(
+                $this->required_constants,
+                'INNCOGNITO_CLIENT_ID',
+                'INNCOGNITO_CLIENT_SECRET',
+                'INNCOGNITO_REGION',
+                'INNCOGNITO_USER_POOL_ID'
+            );
         }
     }
 }
