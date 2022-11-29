@@ -103,11 +103,27 @@ final class Helpers
         return (bool) Env::get( 'BUGSNAG_API_KEY' );
     }
 
-    /***
+    /**
      * @return bool
      */
     public static function is_aws_lambda_image_editor_enabled() : bool
     {
         return (bool) Env::get( 'AWS_LAMBDA_IMAGE_KEY' );
+    }
+
+    /**
+     * @return bool
+     */
+    public static function is_aws_lambda_critical_css_enabled() : bool
+    {
+        return (bool) Env::get( 'AWS_LAMBDA_CRITICAL_CSS_KEY' );
+    }
+
+    /**
+     * @return bool
+     */
+    public static function is_aws_lambda_prerender_enabled() : bool
+    {
+        return (bool) Env::get( 'AWS_LAMBDA_PRERENDER_KEY' );
     }
 }

@@ -126,6 +126,14 @@ final class Config
         if ( Helpers::is_aws_lambda_image_editor_enabled() ) {
             $this->require( 'aws-lambda-image-editor' );
         }
+
+        if ( Helpers::is_aws_lambda_critical_css_enabled() ) {
+            $this->require( 'aws-lambda-critical-css' );
+        }
+
+        if ( Helpers::is_aws_lambda_prerender_enabled() ) {
+            $this->require( 'aws-lambda-prerender' );
+        }
     }
 
     /**
@@ -195,6 +203,22 @@ final class Config
                 'INNCOGNITO_CLIENT_SECRET',
                 'INNCOGNITO_REGION',
                 'INNCOGNITO_USER_POOL_ID'
+            );
+        }
+
+        if ( Helpers::is_aws_lambda_critical_css_enabled() ) {
+            array_push(
+                $this->required_constants,
+                'AWS_LAMBDA_CRITICAL_CSS_SECRET',
+                'AWS_LAMBDA_CRITICAL_CSS_REGION'
+            );
+        }
+
+        if ( Helpers::is_aws_lambda_prerender_enabled() ) {
+            array_push(
+                $this->required_constants,
+                'AWS_LAMBDA_PRERENDER_SECRET',
+                'AWS_LAMBDA_PRERENDER_REGION'
             );
         }
     }
