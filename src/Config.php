@@ -134,6 +134,10 @@ final class Config
         if ( Helpers::is_aws_lambda_prerender_enabled() ) {
             $this->require( 'aws-lambda-prerender' );
         }
+
+        if ( Helpers::is_innstats_enabled() ) {
+            $this->require( 'innstats' );
+        }
     }
 
     /**

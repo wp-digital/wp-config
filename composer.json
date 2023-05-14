@@ -1,6 +1,6 @@
 {
-  "name": "innocode-digital/wp-config",
-  "version": "1.10.0",
+  "name": "wp-digital/wp-config",
+  "version": "1.11.0",
   "type": "library",
   "license": "MIT",
   "require": {

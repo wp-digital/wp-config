@@ -126,4 +126,12 @@ final class Helpers
     {
         return (bool) Env::get( 'AWS_LAMBDA_PRERENDER_KEY' );
     }
+
+    /**
+     * @return bool
+     */
+    public static function is_innstats_enabled() : bool
+    {
+        return (bool) Env::get( 'INNSTATS_PLAN' );
+    }
 }
