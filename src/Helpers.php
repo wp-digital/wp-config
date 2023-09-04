@@ -100,7 +100,11 @@ final class Helpers
      */
     public static function is_bugsnag_enabled() : bool
     {
-        return (bool) Env::get( 'BUGSNAG_API_KEY' );
+        return Env::get( 'BUGSNAG_API_KEY' ) ||
+               (
+                   Env::get( 'BUGSNAG_TOKEN' ) &&
+                   Env::get( 'BUGSNAG_PROJECT' )
+               );
     }
 
     /**
